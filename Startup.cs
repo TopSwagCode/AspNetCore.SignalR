@@ -20,7 +20,6 @@ namespace TopSwagCode.SignalR
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
                 {
@@ -34,21 +33,11 @@ namespace TopSwagCode.SignalR
 
             services.AddHostedService<TimedHostedService>();
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
-
             services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-
             app.UseCors("CorsPolicy");
 
             app.UseSignalR(route =>
