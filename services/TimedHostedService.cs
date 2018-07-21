@@ -51,8 +51,8 @@ namespace TopSwagCode.SignalR.services
                     {
                         _logger.LogInformation(message.Body);
                         dynamic sqsMessage = JsonConvert.DeserializeObject(message.Body);
-
-                        _graphHubContext.Clients.All.SendCoreAsync("LogWork", new[] { sqsMessage.Message }).GetAwaiter().GetResult();
+                        string dynamicMessage = sqsMessage.Message;
+                        _graphHubContext.Clients.All.SendAsync("LogWork", dynamicMessage).GetAwaiter().GetResult();
                         
                      
                         _amazonSqs.DeleteMessageAsync(new DeleteMessageRequest(_queueUrl, message.ReceiptHandle)).GetAwaiter().GetResult();
