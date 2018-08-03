@@ -31,7 +31,7 @@ namespace TopSwagCode.SignalR
 
             services.AddSingleton<IAmazonSQS>(o => new FakeSqsService());
             services.AddHostedService<TimedHostedService>();
-
+            
             services.AddSignalR();
         }
 
