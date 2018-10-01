@@ -1,4 +1,6 @@
-﻿# TopSwagCode.SignalR
+﻿[![Build Status](https://dev.azure.com/topswagcode/TopSwagCode.SignalR/_apis/build/status/kiksen1987.TopSwagCode.SignalR)](https://dev.azure.com/topswagcode/TopSwagCode.SignalR/_build/latest?definitionId=1)
+ 
+ # TopSwagCode.SignalR
 
 Small work in progress for showcasing what to do with WebSockets and how simple it is to get started :)
 
