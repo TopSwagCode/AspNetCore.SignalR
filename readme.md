@@ -13,3 +13,4 @@ Contains 3 small sample usages:
 Made graph with SQS to start of with, but switched over to FakeSQS for easier startup. So people without AWS could try the sample.
 
 Will make a guide in future of how to run this Project
+
