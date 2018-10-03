@@ -184,7 +184,7 @@ namespace TopSwagCode.SignalR.services
                     new Message()
                     {
                         ReceiptHandle = "SomeHandle",
-                        Body = "{'Message': '" + rnd.Next(0, 200) + "'}"
+                        Body = "{'Message': '" + rnd.Next(0, 100) + "'}"
                     }
                 }
             };
