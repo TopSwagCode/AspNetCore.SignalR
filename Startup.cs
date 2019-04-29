@@ -1,7 +1,5 @@
-using Amazon.SQS;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TopSwagCode.SignalR.Hubs;
@@ -23,13 +21,13 @@ namespace TopSwagCode.SignalR
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
                 {
+                    // We should use a real CORS policy
                     builder.AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowAnyOrigin()
                         .AllowCredentials();
                 }));
 
-            services.AddSingleton<IAmazonSQS>(o => new FakeSqsService());
             services.AddHostedService<TimedHostedService>();
             
             services.AddSignalR();
@@ -44,6 +42,7 @@ namespace TopSwagCode.SignalR
                 route.MapHub<ChatHub>("/chathub");
                 route.MapHub<ProcessHub>("/processhub");
                 route.MapHub<GraphHub>("/graphhub");
+                route.MapHub<StockHub>("/graphhub");
             });
         }
     }

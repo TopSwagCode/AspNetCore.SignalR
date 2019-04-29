@@ -10,13 +10,13 @@ using TopSwagCode.SignalR.Hubs;
 
 namespace TopSwagCode.SignalR.services
 {
-    internal class TimedHostedService : IHostedService, IDisposable
+    internal class StockHostedService : IHostedService, IDisposable
     {
         private readonly ILogger _logger;
         private Timer _timer;
-        private readonly IHubContext<GraphHub> _graphHubContext;
+        private readonly IHubContext<StockHub> _graphHubContext;
 
-        public TimedHostedService(ILogger<TimedHostedService> logger, IHubContext<GraphHub> graphHubContext)
+        public StockHostedService(ILogger<TimedHostedService> logger, IHubContext<StockHub> graphHubContext)
         {
             _logger = logger;
             _graphHubContext = graphHubContext;
@@ -36,8 +36,7 @@ namespace TopSwagCode.SignalR.services
         {
             _logger.LogInformation("Timed Background Service is working.");
 
-            _graphHubContext.Clients.All.SendAsync("LogWork", "Some number").GetAwaiter().GetResult();
-
+            _graphHubContext.Clients.All.SendAsync("LogWork", "Some random message").GetAwaiter().GetResult();
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
