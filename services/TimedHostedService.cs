@@ -15,11 +15,13 @@ namespace TopSwagCode.SignalR.services
         private readonly ILogger _logger;
         private Timer _timer;
         private readonly IHubContext<GraphHub> _graphHubContext;
+        private readonly Random _random;
 
         public TimedHostedService(ILogger<TimedHostedService> logger, IHubContext<GraphHub> graphHubContext)
         {
             _logger = logger;
             _graphHubContext = graphHubContext;
+            _random = new Random();
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -36,7 +38,7 @@ namespace TopSwagCode.SignalR.services
         {
             _logger.LogInformation("Timed Background Service is working.");
 
-            _graphHubContext.Clients.All.SendAsync("LogWork", "Some number").GetAwaiter().GetResult();
+            _graphHubContext.Clients.All.SendAsync("LogWork", _random.Next(0,100).ToString()).GetAwaiter().GetResult();
 
         }
 

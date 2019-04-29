@@ -24,10 +24,10 @@ namespace TopSwagCode.SignalR
                     // We should use a real CORS policy
                     builder.AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowAnyOrigin()
+                        .WithOrigins("http://localhost:4000")
                         .AllowCredentials();
                 }));
-
+            
             services.AddHostedService<TimedHostedService>();
             
             services.AddSignalR();
@@ -42,8 +42,10 @@ namespace TopSwagCode.SignalR
                 route.MapHub<ChatHub>("/chathub");
                 route.MapHub<ProcessHub>("/processhub");
                 route.MapHub<GraphHub>("/graphhub");
-                route.MapHub<StockHub>("/graphhub");
+                route.MapHub<StockHub>("/stockhub");
             });
+
+            //app.UseMvc();
         }
     }
 }
