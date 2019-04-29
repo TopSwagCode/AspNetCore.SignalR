@@ -18,10 +18,15 @@ namespace TopSwagCode.SignalR
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Could add a WebAPI to get Current Stock from cache / inmemory, so we don't just see random stocks as price changes.
+
+            // TODO: Add Unit test project.
+
+            // TODO: Add Mediatr.
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
                 {
-                    // We should use a real CORS policy
+                    // TODO: Add Prod Cors policy for TopSwagCode and set this as Dev Policy.
                     builder.AllowAnyMethod()
                         .AllowAnyHeader()
                         .WithOrigins("http://localhost:4000")
@@ -44,8 +49,6 @@ namespace TopSwagCode.SignalR
                 route.MapHub<GraphHub>("/graphhub");
                 route.MapHub<StockHub>("/stockhub");
             });
-
-            //app.UseMvc();
         }
     }
 }
