@@ -1,4 +1,6 @@
-﻿# TopSwagCode.SignalR
+﻿[![Build Status](https://dev.azure.com/topswagcode/TopSwagCode.SignalR/_apis/build/status/kiksen1987.TopSwagCode.SignalR)](https://dev.azure.com/topswagcode/TopSwagCode.SignalR/_build/latest?definitionId=1)
+ 
+ # TopSwagCode.SignalR
 
 Small work in progress for showcasing what to do with WebSockets and how simple it is to get started :)
 
@@ -11,3 +13,4 @@ Contains 3 small sample usages:
 Made graph with SQS to start of with, but switched over to FakeSQS for easier startup. So people without AWS could try the sample.
 
 Will make a guide in future of how to run this Project
+
