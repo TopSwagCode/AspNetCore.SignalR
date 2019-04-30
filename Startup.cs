@@ -9,8 +9,11 @@ namespace TopSwagCode.SignalR
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IHostingEnvironment _environment;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment environment)
         {
+            _environment = environment;
             Configuration = configuration;
         }
 
@@ -18,22 +21,28 @@ namespace TopSwagCode.SignalR
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Could add a WebAPI to get Current Stock from cache / inmemory, so we don't just see random stocks as price changes.
-
-            // TODO: Add Unit test project.
-
-            // TODO: Add Mediatr.
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
                 {
                     // TODO: Add Prod Cors policy for TopSwagCode and set this as Dev Policy.
-                    builder.AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .WithOrigins("http://localhost:4000")
-                        .AllowCredentials();
+                    if (_environment.IsDevelopment())
+                    {
+                        builder.AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .WithOrigins("http://localhost:4000")
+                            .AllowCredentials();
+                    }
+                    else
+                    {
+                        builder.AllowAnyMethod()
+                            .AllowAnyHeader()
+                            .WithOrigins("http://localhost:4000", "http://127.0.0.1:4000", "https://topswagcode.com")
+                            .AllowCredentials();
+                    }
                 }));
-            
-            //services.AddHostedService<TimedHostedService>();
+
+            services.AddTransient<IStockService, FakeStockService>();
+            services.AddHostedService<TimedHostedService>();
             services.AddHostedService<StockHostedService>();
 
             services.AddSignalR();

@@ -17,66 +17,36 @@ namespace TopSwagCode.SignalR.services
         private readonly ILogger _logger;
         private Timer _timer;
         private readonly IHubContext<StockHub> _stockHubContext;
-        private readonly Random _random;
+        private readonly IStockService _stockService;
 
-        public StockHostedService(ILogger<StockHostedService> logger, IHubContext<StockHub> stockHubContext)
+        public StockHostedService(ILogger<StockHostedService> logger, IHubContext<StockHub> stockHubContext, IStockService stockService)
         {
-            // Build some basic UI besides Blog if someone wants to run it locally.
             _logger = logger;
             _stockHubContext = stockHubContext;
-            _random = new Random();
+            _stockService = stockService;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Timed Background Service is starting.");
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(2000));
+            _timer = new Timer(CheckForChangedStockAndPublishToClients, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(2000));
             return Task.CompletedTask;
         }
 
-        private void DoWork(object state)
+        private void CheckForChangedStockAndPublishToClients(object state)
         {
-            // Perhaps some better loggings :D
-            _logger.LogInformation("Timed Background Service is working.");
+            _logger.LogInformation("Timed Stock Background Service is working.");
 
-            var stocks = FetchFreshStocks();
+            var stocks = _stockService.GetChangedStocks();
 
             var jsonString = JsonConvert.SerializeObject(stocks);
-            // TODO: Better method name than LogWork :)
+
             _stockHubContext.Clients.All.SendAsync("UpdateStocks", jsonString).GetAwaiter().GetResult();
         }
 
 
-        // This would normally be a SQS queue or something similar to get information from some external process that keep track on stocks.
-        private List<Stock> FetchFreshStocks()
-        {
-            var newStocks = new List<Stock>();
-
-            var numberOfnewStock = _random.Next(0, 4);
-
-            for (int i = 0; i < numberOfnewStock; i++)
-            {
-                // TODO: Add random stock generator.
-                newStocks.Add(new Stock
-                {
-                    Ask = Math.Round(_random.NextDouble() * (200 - 10) + 10,2),
-                    Bid = Math.Round(_random.NextDouble() * (200 - 10) + 10,2),
-                    Symbol = randomStockNames[_random.Next(0, randomStockNames.Count)]
-                });
-            }
-
-            return newStocks;
-        }
-
-        List<string> randomStockNames = new List<string>
-        {
-            "AMZN", "TGT", "VNET", "CARB", "CCIH", "FB", "IAC", "JCOM", "EGOV", "NTES"
-        };
 
         public Task StopAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Timed Background Service is stopping.");
-
             _timer?.Change(Timeout.Infinite, 0);
 
             return Task.CompletedTask;
