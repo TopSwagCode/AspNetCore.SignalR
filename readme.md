@@ -29,3 +29,7 @@ Now run the Dotnet project by running:
 ```console
 $ dotnet run
 ```
+
+You should now have an App that looks something like this:
+
+![Stock App](stockapp.gif "Stock App")
