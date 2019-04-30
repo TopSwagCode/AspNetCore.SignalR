@@ -30,7 +30,7 @@ namespace TopSwagCode.SignalR.services
         public Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Timed Background Service is starting.");
-            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(1000));
+            _timer = new Timer(DoWork, null, TimeSpan.Zero, TimeSpan.FromMilliseconds(2000));
             return Task.CompletedTask;
         }
 
@@ -43,7 +43,7 @@ namespace TopSwagCode.SignalR.services
 
             var jsonString = JsonConvert.SerializeObject(stocks);
             // TODO: Better method name than LogWork :)
-            _stockHubContext.Clients.All.SendAsync("LogWork", jsonString).GetAwaiter().GetResult();
+            _stockHubContext.Clients.All.SendAsync("UpdateStocks", jsonString).GetAwaiter().GetResult();
         }
 
 
@@ -59,14 +59,19 @@ namespace TopSwagCode.SignalR.services
                 // TODO: Add random stock generator.
                 newStocks.Add(new Stock
                 {
-                    Ask = 1.11,
-                    Bid = 1.11,
-                    Symbol = "ASD"
+                    Ask = Math.Round(_random.NextDouble() * (200 - 10) + 10,2),
+                    Bid = Math.Round(_random.NextDouble() * (200 - 10) + 10,2),
+                    Symbol = randomStockNames[_random.Next(0, randomStockNames.Count)]
                 });
             }
 
             return newStocks;
         }
+
+        List<string> randomStockNames = new List<string>
+        {
+            "AMZN", "TGT", "VNET", "CARB", "CCIH", "FB", "IAC", "JCOM", "EGOV", "NTES"
+        };
 
         public Task StopAsync(CancellationToken cancellationToken)
         {

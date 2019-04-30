@@ -33,8 +33,9 @@ namespace TopSwagCode.SignalR
                         .AllowCredentials();
                 }));
             
-            services.AddHostedService<TimedHostedService>();
-            
+            //services.AddHostedService<TimedHostedService>();
+            services.AddHostedService<StockHostedService>();
+
             services.AddSignalR();
         }
 
