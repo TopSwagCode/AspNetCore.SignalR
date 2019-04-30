@@ -4,6 +4,6 @@
     <UserSecretsId>1c4b8384-23cc-46b6-a537-1f8abb24dc46</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 </Project>
