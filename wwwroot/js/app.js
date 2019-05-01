@@ -13,7 +13,6 @@ connection.on("UpdateStocks", (stocksJson) => {
 connection.start().catch(err => console.error(err));
 
 connection.onclose(function () {
-    console.log("closing connection");
     timeoutConnection();
 });
 
