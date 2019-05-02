@@ -13,7 +13,6 @@ connection.on("UpdateStocks", (stocksJson) => {
 connection.start().catch(err => console.error(err));
 
 connection.onclose(function () {
-    console.log("closing connection");
     timeoutConnection();
 });
 
@@ -31,16 +30,12 @@ function updateStock(stock){
         stockElement.cells[0].innerHTML = stock.symbol;
         stockElement.cells[1].innerHTML = stock.bid;
         stockElement.cells[2].innerHTML = stock.ask;
-        
-        // Update background color
         stockElement.style.backgroundColor = "yellow";
 
-        // SetTimeout to revert color
         setTimeout(function(){ UpdateBackgroundColor(stockElement); }, 1500);
     }
     else{
         var table = document.getElementById("stocksTable");
-        console.log(table);
         var row = table.insertRow(1);
         row.id = stock.symbol;
         var symbolCell = row.insertCell(0);

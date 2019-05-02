@@ -24,7 +24,6 @@ namespace TopSwagCode.SignalR
             services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
                 {
-                    // TODO: Add Prod Cors policy for TopSwagCode and set this as Dev Policy.
                     if (_environment.IsDevelopment())
                     {
                         builder.AllowAnyMethod()
