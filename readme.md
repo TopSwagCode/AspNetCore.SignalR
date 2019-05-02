@@ -32,11 +32,18 @@ $ dotnet run
 
 Now open your browser of chouse at http://localhost:4000 and you should have links to the 4 demo apps as shown below:
 
+# Chat
 
 ![Chat App](chatapp.gif "Chat App")
 
+# Graph
+
 ![Graph App](graphapp.gif "Graph App")
 
+# Processing
+
 ![Processing App](processingapp.gif "Processing App")
+
+# Stock
 
 ![Stock App](stockapp.gif "Stock App")
