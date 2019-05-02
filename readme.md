@@ -5,11 +5,11 @@ Small work in progress for showcasing stuff to do with WebSockets and how simple
 Contains 4 small sample usages:
 
 * Chat -> Small simple chat between all users.
-* Graph -> Shows Server numbers to all users. Eg. Admin site or stock tradeing.
-* Process -> Shows how you could offload some work but still keep your user uptodate on progress before its done.
+* Graph -> Shows some numbers to all users. Eg. Admin dashboard.
+* Process -> Shows how you could offload some work but still keep your user informed on progress.
 * Stocks -> Show how to broadcast complex models using json.
 
-To try the Stock sample locally:
+Run app locally:
 
 Start a http server on port 4000 in the wwwroot folder. (My goto is https://www.nuget.org/packages/dotnet-serve/)
 install the tool: 
@@ -30,6 +30,13 @@ Now run the Dotnet project by running:
 $ dotnet run
 ```
 
-You should now have an App that looks something like this:
+Now open your browser of chouse at http://localhost:4000 and you should have links to the 4 demo apps as shown below:
+
+
+![Chat App](chatapp.gif "Chat App")
+
+![Graph App](graphapp.gif "Graph App")
+
+![Processing App](processingapp.gif "Processing App")
 
 ![Stock App](stockapp.gif "Stock App")

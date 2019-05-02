@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TopSwagCode - SignalR Graph</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script> 
+</head>
+<body>
+<div style="position: relative; height:80vh; width:80vw">
+    <canvas id="myChart"></canvas>
+    <script>
+        var myData = [12, 19, 3, 5, 2, 3]; // Just dummy data. You can load from your server.
+        var ctx = document.getElementById("myChart").getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: myData,
+                datasets: [{
+                    label: 'Some process',
+                    data: myData,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+
+    </script>
+    <hr />
+    <footer>
+        <p>TopSwagCode - SignalR Graph</p>
+    </footer>
+</div>
+
+<script src="/js/signalr.js"></script>    
+<script src="/js/graph-app.js"></script>
+
+</body>
+</html>
