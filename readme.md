@@ -30,6 +30,12 @@ Now run the Dotnet project by running:
 $ dotnet run
 ```
 
+Or you could run the server with docker ;)
+
+```console
+$ docker run --name topswagcode -p 51133:80 kiksen1987/signalr
+```
+
 Now open your browser of chouse at http://localhost:4000 and you should have links to the 4 demo apps as shown below:
 
 # Chat
