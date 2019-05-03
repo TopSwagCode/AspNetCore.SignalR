@@ -49,6 +49,8 @@ namespace TopSwagCode.SignalR
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseFileServer(); // For the wwwroot folder
+
             app.UseCors("CorsPolicy");
 
             app.UseSignalR(route =>

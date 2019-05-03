@@ -11,19 +11,6 @@ Contains 4 small sample usages:
 
 Run app locally:
 
-Start a http server on port 4000 in the wwwroot folder. (My goto is https://www.nuget.org/packages/dotnet-serve/)
-install the tool: 
-
-```console
-$ dotnet tool install --global dotnet-serve --version 1.2.0
-```
-
-run the tool:
-
-```console
-$ dotnet-serve -p 4000
-```
-
 Now run the Dotnet project by running:
 
 ```console
