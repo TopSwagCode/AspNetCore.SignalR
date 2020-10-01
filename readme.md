@@ -1,4 +1,4 @@
-﻿ # TopSwagCode.SignalR
+﻿ # AspNetCore.SignalR
 
 Small work in progress for showcasing stuff to do with WebSockets and how simple it is getting started :)
 
